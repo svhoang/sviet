@@ -94,6 +94,26 @@ def average(numbers):
     total = total / len(numbers)
     return total
 
+def get_average(student):
+    homework = average(student["homework"])
+    quizzes = average(student["quizzes"])
+    tests = average(student["tests"])
+    weighted_avg = 0.10*homework + 0.30*quizzes + 0.6*tests
+    return weighted_avg
+
+def get_letter_grade(score):
+    if score >= 90:
+        return "A"
+    elif score >= 80 and score < 90:
+        return "B"
+    elif score >= 70 and score < 80:
+        return "C"
+    elif score >= 60 and score < 70:
+        return "D"
+    else:
+        return "F"
+get_letter_grade(get_average(lloyd))
+#print (get_letter_grade(get_average(lloyd)))
 
 
 #print (lloyd["name"])
