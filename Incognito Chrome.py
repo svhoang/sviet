@@ -18,17 +18,37 @@ system("\"C:\Program Files (x86)\Google\Chrome\Application\chrome.exe\" -incogni
 
 #%%
 #https://sites.google.com/a/chromium.org/chromedriver/getting-started
+#https://github.com/seleniumhq/selenium/issues/1689
+#https://stackoverflow.com/questions/31349788/using-selenium-in-python-to-click-through-all-elements-with-the-same-class-name
+
 import time
 from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.common.keys import Keys
 
-driver = webdriver.Chrome('C:/Users/elot1z6/Documents/Python Scripts/Selenium/chromedriver/chromedriver.exe')
+executable_path = "C:/Users/elot1z6/Documents/Python Scripts/Selenium/chromedriver/chromedriver.exe"
+chrome_options = Options()
 
-driver.get('http://www.google.com/xhtml');
+#private browsing
+chrome_options.add_argument("--incognito")
+chrome_options.add_argument("--window-size=800,600")
+#options = webdriver.ChromeOptions()
+#options.add_argument('C:/Users/elot1z6/Documents/Python Scripts/Selenium/chromedriver/chromedriver.exe')
+driver = webdriver.Chrome(executable_path=executable_path,chrome_options=chrome_options)
+#driver.set_window_size(1024, 600)
+#driver = webdriver.Chrome('C:/Users/elot1z6/Documents/Python Scripts/Selenium/chromedriver/chromedriver.exe')
+
+website = driver.get('http://www.soundcloud.com')
+soundcloud = website.find_element_by_id(')
 time.sleep(5) # Let the user actually see something!
-search_box = driver.find_element_by_name('q')
-search_box.send_keys('Test')
-search_box.submit()
-time.sleep(5) # Let the user actually see something!
+#assert "test" in driver.title
+#search_box = driver.find_element_by_title('Sign in')
+#search_box.send_keys('Test')
+#search_box.submit()
+
+
+
+#time.sleep(5) # Let the user actually see something!
 #driver.quit()
 #%%
 from selenium import webdriver
@@ -42,7 +62,7 @@ options.add_argument("--start-maximized")
 
 driver = webdriver.Chrome(chrome_options=options)
 #%%
-#displays all python modules currently installed
+#pip
 import pip
 installed_packages = pip.get_installed_distributions()
 installed_packages_list = sorted(["%s==%s" % (i.key, i.version)
@@ -77,3 +97,11 @@ url_login = "https://accounts.google.com/ServiceLogin"
 url_auth = "https://accounts.google.com/ServiceLoginAuth"
 session = SessionGoogle(url_login, url_auth, "myGoogleLogin", "myPassword")
 print (session.get("plus.google.com"))
+
+
+#%% password encryption
+#https://stackoverflow.com/questions/157938/hiding-a-password-in-a-python-script-insecure-obfuscation-only
+import base64
+print (base64.b64encode(b'password'))
+
+print (base64.b64decode("cGFzc3dvcmQ="))
