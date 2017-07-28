@@ -21,6 +21,9 @@ system("\"C:\Program Files (x86)\Google\Chrome\Application\chrome.exe\" -incogni
 #https://github.com/seleniumhq/selenium/issues/1689
 #https://stackoverflow.com/questions/31349788/using-selenium-in-python-to-click-through-all-elements-with-the-same-class-name
 
+#select for soundcloud signin button -->https://www.youtube.com/watch?v=mW138ljocCM
+##content > div > div > div.l-front-hero.l-inner-fullwidth > div > div > div.frontHero__signin > button.g-opacity-transition.frontHero__loginButton.g-button-transparent-inverted.sc-button.sc-button-medium.loginButton
+
 import time
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
@@ -32,35 +35,35 @@ chrome_options = Options()
 #private browsing
 chrome_options.add_argument("--incognito")
 chrome_options.add_argument("--window-size=800,600")
-#options = webdriver.ChromeOptions()
-#options.add_argument('C:/Users/elot1z6/Documents/Python Scripts/Selenium/chromedriver/chromedriver.exe')
 driver = webdriver.Chrome(executable_path=executable_path,chrome_options=chrome_options)
-#driver.set_window_size(1024, 600)
-#driver = webdriver.Chrome('C:/Users/elot1z6/Documents/Python Scripts/Selenium/chromedriver/chromedriver.exe')
+driver.set_window_position(2000,1000)
+website = driver.get('http://www.google.ca')
+assert "Google" in driver.title
+elem = driver.find_element_by_name('q')
+elem.clear()
+elem.send_keys("Soundcloud")
+elem.send_keys(Keys.RETURN)
+assert "No results found." not in driver.page_source
 
-website = driver.get('http://www.soundcloud.com')
-soundcloud = website.find_element_by_id(')
+
 time.sleep(5) # Let the user actually see something!
-#assert "test" in driver.title
-#search_box = driver.find_element_by_title('Sign in')
-#search_box.send_keys('Test')
-#search_box.submit()
 
 
-
-#time.sleep(5) # Let the user actually see something!
 #driver.quit()
 #%%
-from selenium import webdriver
-driver.set_window_size(1024, 600)
-driver.maximize_window()
+#Using Selenium to write test cases
+import unittest 
 
-from selenium import webdriver
+def fun(x):
+    return x+1
 
-options = webdriver.ChromeOptions()
-options.add_argument("--start-maximized")
+class MyTest(unittest.TestCase):
+    def test(self):
+        self.asertEqual(fun(3),4)
+        
+fun(12)
 
-driver = webdriver.Chrome(chrome_options=options)
+
 #%%
 #pip
 import pip
